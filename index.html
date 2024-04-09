@@ -9,12 +9,72 @@
 </head>
 <body>
 <tw-story><noscript><tw-noscript>JavaScript needs to be enabled to play ghost hunt!.</tw-noscript></noscript></tw-story>
-<tw-storydata name="ghost hunt!" startnode="38" creator="Twine" creator-version="2.8.1" format="Harlowe" format-version="3.3.8" ifid="95ED9467-B16F-406B-B329-962309EA024C" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Start" tags="" position="850,425" size="100,100">The house across the street is about to be sold off but the agent who&#39;s selling it is currently on break. It&#39;s eerie, but you&#39;ve heard rumors of the house being somewhat....haunted.
+<tw-storydata name="ghost hunt!" startnode="38" creator="Twine" creator-version="2.8.1" format="Harlowe" format-version="3.3.8" ifid="95ED9467-B16F-406B-B329-962309EA024C" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">tw-sidebar {
+    display: none;
+}
 
-Armed with only your trusty polaroid camera, you brace yourself and approach the front door. You only have about 10 minutes to explore the place before the bus comes. Better make this quick. You push past the heavy iron gate and [[step inside]].</tw-passagedata><tw-passagedata pid="2" name="step inside" tags="" position="850,600" size="100,100">The door swings shut, and your scratch at the dust that blows into your eyes. Maybe there could be some kind of ghostly evidence in the [[living room]]?
+.transition-in{
+  opacity: 0;
+  position: absolute;
+}
+
+.passage{
+  transition: 1s;
+  -webkit-transition: 1s;
+}
+
+.transition-out{
+  opacity: 0 !important;
+  position: absolute;
+}
+
+body{
+  background-color: white;
+  color: darkgrey;
+  font-family: Futura, Impact, Helvetica, sans-serif;
+}
+
+a{
+  	color:red;
+}</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Start" tags="" position="850,425" size="100,100">The house across the street is about to be sold off but the agent who&#39;s selling it is currently on break. It&#39;s eerie, but you&#39;ve heard rumors of the house being somewhat....haunted. 
+
+Armed with only your trusty polaroid camera, you brace yourself and approach the front door. You only have about 5 minutes to explore the place before you could get busted for trespassing. Better make this quick. You push past the heavy iron gate and [[step inside]].
+</tw-passagedata><tw-passagedata pid="2" name="step inside" tags="" position="850,600" size="100,100">The door swings shut, and your scratch at the dust that blows into your eyes. Maybe there could be some kind of ghostly evidence in the [[living room]]?
 
 (set: $second to 0)
-(set:$minute to 10)
+(set:$minute to 5)
+(set:$catsCoins to 0)
+(set:$yourCoins to 0)
+(set: $octiniCaught to -1)
+(set: $recipeObtain to -1)
+(set: $ghostTime to 100)
+(set:$yourCoins to 0)
+(set: $sunRoom to False)
+
+You have (css: &quot;color: red; font-size: 100%&quot;)[|amount&gt;[$minute]] minutes and  (css: &quot;color: red; font-size: 100%&quot;)[|amount2&gt;[$minute]] seconds left!
+(live: 1s)[
+	(set: $second to it - 1)
+    (if:$second &lt; 0)[(set: $second to 59) (set: $minute to it -1)]
+    (if: ($minute is 0) and ($second is 0)) [(go-to: &quot;END&quot;)]
+	(replace: ?amount)[$minute]
+    (replace: ?amount2)[$second]
+]</tw-passagedata><tw-passagedata pid="3" name="END" tags="" position="1000,425" size="100,100">(if:$minute is 0 and $second is 0)[Ah! Time&#39;s up! Better get out of here before you get caught trespassing.]
+(else:)[Time&#39;s still not up, but you decide to get out of here before you get caught trespassing.]
+(set: $ghostTotal to ($compCaught + $catCaught + $octiniCaught))
+You look down at your hand. 
+(if:$ghostTotal is 0)[There&#39;s nothing there :(
+Maybe this house isn&#39;t haunted actually.](else-if: $ghostTotal is 1)[Whoa, look at this neat photo that you have!]
+(else:)[Whoa, look at these neat photos that you have!]
+
+
+END...or [[Play Again?-&gt;Start]]
+
+</tw-passagedata><tw-passagedata pid="4" name="living room" tags="" position="850,725" size="100,100">(if: $catCaught is not 1)[In the living room, you notice a large [[statue of a cat]] with its paw open. Putting your ear up to the statue, it rumbles slightly, and you hear the mentallic click of several tiny objects.]
+(else:)[The cats in the living room seem happy.]
+
+You could head right to the [[kitchen -&gt;Kitchen]] or go towards the [[office-&gt;Office]]. Or you could [[leave-&gt;END]] before you&#39;re caught trespassing.
+
+
 
 You have (css: &quot;color: red; font-size: 100%&quot;)[|amount&gt;[$minute]] minutes and  (css: &quot;color: red; font-size: 100%&quot;)[|amount2&gt;[$minute]] seconds left!
 
@@ -24,50 +84,80 @@ You have (css: &quot;color: red; font-size: 100%&quot;)[|amount&gt;[$minute]] mi
     (if: ($minute is 0) and ($second is 0)) [(go-to: &quot;END&quot;)]
 	(replace: ?amount)[$minute]
     (replace: ?amount2)[$second]
-]
+]</tw-passagedata><tw-passagedata pid="5" name="Kitchen" tags="" position="650,725" size="100,100">The kitchen seems decently old, but functional. And is that four whole ovens? Granite countertops, wood flooring, polished marble island, the whole nine yards. Most notable is a sizeable wooden bar area, which looks scarily clean compared to the rest of the abode, like the [[living room]]. (if:$sunRoom is False) [Ahead, you can also make out the [[sunroom]].]
 
-(set:$catsCoins to 0)
-(set:$yourCoins to 0)
-(set: $octiniCaught to -1)
-(set: $recipeObtain to -1)
-(set: $sunRoom to False)</tw-passagedata><tw-passagedata pid="3" name="END" tags="" position="1000,425" size="100,100">(if:$minute is 0 and $second is 0)[Ah! Time&#39;s up! Better get out of here before you get caught trespassing.]
-(else:)[Time&#39;s still not up, but you decide to get out of here before you get caught trespassing.]
-(set: $ghostTotal to ($compCaught + $catCaught + $octiniCaught))
-You look down at your hand.
-(if:$ghostTotal is 0)[There&#39;s nothing there :(
-Maybe this house isn&#39;t haunted actually.](else-if: $ghostTotal is 1)[Whoa, look at this neat photo that you have!]
-(else:)[Whoa, look at these neat photos that you have!]
+(if:$octiniCaught is 1)[Well, a ghost was certainly making themselves at home. And you caught it on camera too! You gingerly take the drink from its invisible grasp. It is an extremely cold martini. You [[take a sip.]]](else:)[Maybe a ghost has been making themselves at home? Curiously, you [[take a seat at the bar]].]
 
+You have (css: &quot;color: red; font-size: 100%&quot;)[|amount&gt;[$minute]] minutes and  (css: &quot;color: red; font-size: 100%&quot;)[|amount2&gt;[$minute]] seconds left!
 
-END...or [[Play Again?-&gt;Start]]</tw-passagedata><tw-passagedata pid="4" name="living room" tags="" position="850,725" size="100,100">(if: $catCaught is not 1)[In the living room, you notice a large [[statue of a cat]] with its paw open. Putting your ear up to the statue, it rumbles slightly, and you hear the mentallic click of several tiny objects.]
-(else:)[The cats in the living room seem happy.]
-
-You could head right to the [[kitchen -&gt;Kitchen]] or go towards the [[office-&gt;Office]]. Or you could [[leave-&gt;END]] before you&#39;re caught trespassing.
-</tw-passagedata><tw-passagedata pid="5" name="Kitchen" tags="" position="650,725" size="100,100">The kitchen seems decently old, but functional. And is that four whole ovens? Granite countertops, wood flooring, polished marble island, the whole nine yards. Most notable is a sizeable wooden bar area, which looks scarily clean compared to the rest of the abode, like the [[living room]]. (if:$sunRoom is False) [Ahead, you can also make out the [[sunroom]].]
-
-(if:$octiniCaught is 1)[Well, a ghost was certainly making themselves at home. And you caught it on camera too! You gingerly take the drink from its invisible grasp. It is an extremely cold martini. You [[take a sip.]]](else:)[Maybe a ghost has been making themselves at home? Curiously, you [[take a seat at the bar]].]</tw-passagedata><tw-passagedata pid="6" name="Office" tags="" position="1050,750" size="100,100">Sat inside the office is a dusty computer. The dust makes you consider going back to the [[living room]] or heading to the [[bedroom]].
+(live: 1s)[
+	(set: $second to it - 1)
+    (if:$second &lt; 0)[(set: $second to 59) (set: $minute to it -1)]
+    (if: ($minute is 0) and ($second is 0)) [(go-to: &quot;END&quot;)]
+	(replace: ?amount)[$minute]
+    (replace: ?amount2)[$second]
+]</tw-passagedata><tw-passagedata pid="6" name="Office" tags="" position="1050,750" size="100,100">Sat inside the office is a dusty computer. The dust makes you consider going back to the [[living room]] or heading to the [[bedroom]]. 
 
 (if:$recipeObtain is not 1) [A [[piece of scrap paper-&gt;recipeObtain]] catches your eye: a crumpled up drink recipe that seems to have been used several dozen times, with scribble and drink stains from accidents.]
 
-(if:$compCaught is not 1) [You fiddle with the power button and jiggle the mouse, and you&#39;re presented with a [[login screen]].]</tw-passagedata><tw-passagedata pid="7" name="Convo" tags="" position="1000,875" size="100,100">(if: $ghostTime is not 0)
+(if:$compCaught is not 1) [You fiddle with the power button and jiggle the mouse, and you&#39;re presented with a [[login screen]].]
+
+You have (css: &quot;color: red; font-size: 100%&quot;)[|amount&gt;[$minute]] minutes and  (css: &quot;color: red; font-size: 100%&quot;)[|amount2&gt;[$minute]] seconds left!
+
+(live: 1s)[
+	(set: $second to it - 1)
+    (if:$second &lt; 0)[(set: $second to 59) (set: $minute to it -1)]
+    (if: ($minute is 0) and ($second is 0)) [(go-to: &quot;END&quot;)]
+	(replace: ?amount)[$minute]
+    (replace: ?amount2)[$second]
+]</tw-passagedata><tw-passagedata pid="7" name="Convo" tags="" position="1000,875" size="100,100">(if: $ghostTime &gt; $minute)
 [
-You&#39;re sat in front of another empty hunk of text. This time, you have no idea what to input, but your hands start to shakily move towards the keyboard on their own.
+You&#39;re sat in front of another empty textbox. This time, you have no idea what to input, but your hands start to shakily move towards the keyboard on their own.
 (force-input: bind $convostring, &quot;hey there :)&quot;)
 (live: 0.2s)[(if: $convostring is &#39;hey there :)&#39;)[Wait a minute. You didn&#39;t type that. Maybe it was that drink you had? Maybe there&#39;s a ghost possessing you and causing you to type otherworldly strings...[[what does it want?]]]]
 ]
 (else:)[(go-to: &quot;timedConfront&quot;)]
-</tw-passagedata><tw-passagedata pid="8" name="statue of a cat" tags="" position="850,850" size="100,100"> It seems like you could slide something in its mouth....or head back to the [[living room]].
 
+You have (css: &quot;color: red; font-size: 100%&quot;)[|amount&gt;[$minute]] minutes and  (css: &quot;color: red; font-size: 100%&quot;)[|amount2&gt;[$minute]] seconds left!
+
+(live: 1s)[
+	(set: $second to it - 1)
+    (if:$second &lt; 0)[(set: $second to 59) (set: $minute to it -1)]
+    (if: ($minute is 0) and ($second is 0)) [(go-to: &quot;END&quot;)]
+	(replace: ?amount)[$minute]
+    (replace: ?amount2)[$second]
+]</tw-passagedata><tw-passagedata pid="8" name="statue of a cat" tags="" position="850,850" size="100,100"> You have (css: &quot;color: red; font-size: 100%&quot;)[|amount&gt;[$minute]] minutes and  (css: &quot;color: red; font-size: 100%&quot;)[|amount2&gt;[$minute]] seconds left!
+
+(live: 1s)[
+	(set: $second to it - 1)
+    (if:$second &lt; 0)[(set: $second to 59) (set: $minute to it -1)]
+    (if: ($minute is 0) and ($second is 0)) [(go-to: &quot;END&quot;)]
+	(replace: ?amount)[$minute]
+    (replace: ?amount2)[$second]
+]
+
+It seems like you could slide something in its mouth....or head back to the [[living room]].
+ 
  (if: $catCoins is 0 and $yourCoins is 0) [Not like you have any coins on you right now.]
  (if: $catCoins &gt; 0) [You&#39;ve already put a coin in, and you&#39;ve seen nothing happen so far.]
- (if: $yourCoins &gt; 0)[Care to [[put a coin in?]] If you do, then you cannot have it back. Although you could always [[decline-&gt;living room]]. ]</tw-passagedata><tw-passagedata pid="9" name="put a coin in?" tags="" position="850,975" size="100,100">You deposit the coin inside the cat&#39;s mouth. It could just be your imagination, but you could almost feel the sandpaper texture of the cat&#39;s tongue scratch against your finger.
+ (if: $yourCoins &gt; 0)[Care to [[put a coin in?]] If you do, then you cannot have it back. Although you could always [[decline-&gt;living room]]. ]
+ 
+</tw-passagedata><tw-passagedata pid="9" name="put a coin in?" tags="" position="850,975" size="100,100">You deposit the coin inside the cat&#39;s mouth. It could just be your imagination, but you could almost feel the sandpaper texture of the cat&#39;s tongue scratch against your finger. 
 
-The cat&#39;s eyes seem to gleam, and you hear the harsh sound of the coin inside its cold stone body. The statue seems to have been fed a nice treat.
+The cat&#39;s eyes seem to gleam, and you hear the harsh sound of the coin inside its cold stone body. The statue seems to have been fed a nice [[treat-&gt;living room]].
 (set: $yourCoins to it -1)
 (set: $catsCoins to it +1)
 (if: $catsCoins is 2)[The muted rumbling of the statue has faded. You get the feeling that the [[cat is full-&gt;catch cats!]].]
 
-</tw-passagedata><tw-passagedata pid="10" name="catch cats!" tags="" position="850,1100" size="100,100">The room gets cold...as if there were several ghosts in there with you. You can feel them whizzing around the room...time to whip out your camera and take a photo! You want to try getting &#39;&#39;ALL OF THEM&#39;&#39; in the middle of your screen....
+You have (css: &quot;color: red; font-size: 100%&quot;)[|amount&gt;[$minute]] minutes and  (css: &quot;color: red; font-size: 100%&quot;)[|amount2&gt;[$minute]] seconds left!
+
+(live: 1s)[
+	(set: $second to it - 1)
+    (if:$second &lt; 0)[(set: $second to 59) (set: $minute to it -1)]
+    (if: ($minute is 0) and ($second is 0)) [(go-to: &quot;END&quot;)]
+	(replace: ?amount)[$minute]
+    (replace: ?amount2)[$second]
+]</tw-passagedata><tw-passagedata pid="10" name="catch cats!" tags="" position="850,1100" size="100,100">The room gets cold...as if there were several ghosts in there with you. You can feel them whizzing around the room...time to whip out your camera and take a photo! You want to try getting &#39;&#39;ALL OF THEM&#39;&#39; in the middle of your screen....
 
 (meter: bind $catMeter1, 1000, &quot;X&quot;, , (gradient:90,  0, red, 0.29, orange, 0.3,green,  0.7,green, 0.71, orange, 1, red))
 (meter: bind $catMeter2, 1000, &quot;X&quot;, , (gradient:90,  0, red, 0.29, orange, 0.3,green,  0.7,green, 0.71, orange, 1, red))
@@ -87,21 +177,49 @@ Aaaand....[[click-&gt;catClick]]!
 	(if: $catMeter1 &gt;= 1000)[(set: _direction1 to -15)]
     (if:$catMeter1  &lt;= 0)[(set: _direction1 to 15)]
     (set: $catMeter1 to it +_direction1)
-
+    
 	(if: $catMeter2 &gt;= 1000)[(set: _direction2 to -10)]
     (if:$catMeter2  &lt;= 0)[(set: _direction2 to 10)]
     (set: $catMeter2 to it +_direction2)
-
+    
     (if: $catMeter3 &gt;= 1000)[(set: _direction3 to -5)]
     (if:$catMeter3  &lt;= 0)[(set: _direction3 to 5)]
     (set: $catMeter3 to it +_direction3)
-]</tw-passagedata><tw-passagedata pid="11" name="bedroom" tags="" position="1475,725" size="100,100">The bedroom past the [[office-&gt;Office]] is extremely cluttered. You see a wooden bedframe with a nice plush mattress on top, a well as some dusty stuffed animals. Floral print sheets lie on top of the bed, and you see a [[coin]] lying on the ground.</tw-passagedata><tw-passagedata pid="12" name="what does it want?" tags="" position="1025,1000" size="100,100">The words leave your lips before you even register speaking them.
+]
+
+You have (css: &quot;color: red; font-size: 100%&quot;)[|amount&gt;[$minute]] minutes and  (css: &quot;color: red; font-size: 100%&quot;)[|amount2&gt;[$minute]] seconds left!
+
+(live: 1s)[
+	(set: $second to it - 1)
+    (if:$second &lt; 0)[(set: $second to 59) (set: $minute to it -1)]
+    (if: ($minute is 0) and ($second is 0)) [(go-to: &quot;END&quot;)]
+	(replace: ?amount)[$minute]
+    (replace: ?amount2)[$second]
+]</tw-passagedata><tw-passagedata pid="11" name="bedroom" tags="" position="1475,725" size="100,100">The bedroom past the [[office-&gt;Office]] is extremely cluttered. You see a wooden bedframe with a nice plush mattress on top, a well as some dusty stuffed animals. Floral print sheets lie on top of the bed, and you see a [[coin]] lying on the ground.
+
+You have (css: &quot;color: red; font-size: 100%&quot;)[|amount&gt;[$minute]] minutes and  (css: &quot;color: red; font-size: 100%&quot;)[|amount2&gt;[$minute]] seconds left!
+
+(live: 1s)[
+	(set: $second to it - 1)
+    (if:$second &lt; 0)[(set: $second to 59) (set: $minute to it -1)]
+    (if: ($minute is 0) and ($second is 0)) [(go-to: &quot;END&quot;)]
+	(replace: ?amount)[$minute]
+    (replace: ?amount2)[$second]
+]</tw-passagedata><tw-passagedata pid="12" name="what does it want?" tags="" position="1025,1000" size="100,100">The words leave your lips before you even register speaking them.
 
 (force-input: bind $convostring, &quot;i dunno, why are you here?&quot;)
 
 (live: 0.2s)[(if: $convostring is &#39;i dunno, why are you here?&#39;)[You just want to take a photo. It&#39;s not even to show others, or to get money, or to give to scientists or the government. You just felt like grabbing photos of a ghost, and even if you told someone, would they even believe you? Maybe you just want to see [[its silly face]].]]
 
-</tw-passagedata><tw-passagedata pid="13" name="catch octini!" tags="" position="600,1175" size="100,100">Here it is: the moment you&#39;ve been waiting for. There&#39;s a ghost in front of you, and you&#39;ve got your camera pointed right at it. You can only catch a slight glimpse through the camera lens. All you have to do is wait until the ghost is squarely in the &#39;&#39;MIDDLE&#39;&#39; of your field of view so you could get a nice large souvenir shot to place in your scrapbook.
+You have (css: &quot;color: red; font-size: 100%&quot;)[|amount&gt;[$minute]] minutes and  (css: &quot;color: red; font-size: 100%&quot;)[|amount2&gt;[$minute]] seconds left!
+
+(live: 1s)[
+	(set: $second to it - 1)
+    (if:$second &lt; 0)[(set: $second to 59) (set: $minute to it -1)]
+    (if: ($minute is 0) and ($second is 0)) [(go-to: &quot;END&quot;)]
+	(replace: ?amount)[$minute]
+    (replace: ?amount2)[$second]
+]</tw-passagedata><tw-passagedata pid="13" name="catch octini!" tags="" position="600,1175" size="100,100">Here it is: the moment you&#39;ve been waiting for. There&#39;s a ghost in front of you, and you&#39;ve got your camera pointed right at it. You can only catch a slight glimpse through the camera lens. All you have to do is wait until the ghost is squarely in the &#39;&#39;MIDDLE&#39;&#39; of your field of view so you could get a nice large souvenir shot to place in your scrapbook.
 
 (meter: bind $octiniMeter, 1000, &quot;X&quot;, , (gradient:90,  0, red, 0.39, orange, 0.4,green,  0.6,green, 0.61, orange, 1, red))
 
@@ -115,12 +233,30 @@ Aaaand....[[click-&gt;octiniClick]]!
     (if:$octiniMeter  &lt;= 0)[(set: _direction to 50)]
     (set: $octiniMeter to it +_direction)
 ]
-</tw-passagedata><tw-passagedata pid="14" name="octiniClick" tags="" position="450,1275" size="100,100">(if: $octiniMeter &gt;= 400 and $octiniMeter &lt;= 600)[You feel as if you were able to snap a photo of the ghost on camera. At least, you hit all the buttons right! But you don&#39;t have time to look at the photo right now, and it&#39;s still developing. You have GOT to see if there are some other ghosts hanging around. You place the photo in your pocket and head back to [[the kitchen -&gt;Kitchen]].] (else:) [The ghost was too slippery for you: it seems like you might not have gotten a good photo, and it was out of frame. But you&#39;re going to grit your teeth and [[try again-&gt;catch octini!]] anyways. Not when it&#39;s is literally right in front of you!]
+
+You have (css: &quot;color: red; font-size: 100%&quot;)[|amount&gt;[$minute]] minutes and  (css: &quot;color: red; font-size: 100%&quot;)[|amount2&gt;[$minute]] seconds left!
+
+(live: 1s)[
+	(set: $second to it - 1)
+    (if:$second &lt; 0)[(set: $second to 59) (set: $minute to it -1)]
+    (if: ($minute is 0) and ($second is 0)) [(go-to: &quot;END&quot;)]
+	(replace: ?amount)[$minute]
+    (replace: ?amount2)[$second]
+]</tw-passagedata><tw-passagedata pid="14" name="octiniClick" tags="" position="450,1275" size="100,100">(if: $octiniMeter &gt;= 400 and $octiniMeter &lt;= 600)[You feel as if you were able to snap a photo of the ghost on camera. At least, you hit all the buttons right! But you don&#39;t have time to look at the photo right now, and it&#39;s still developing. You have GOT to see if there are some other ghosts hanging around. You place the photo in your pocket and head back to [[the kitchen-&gt;Kitchen]].] (else:) [The ghost was too slippery for you: it seems like you might not have gotten a good photo, and it was out of frame. But you&#39;re going to grit your teeth and [[try again-&gt;catch octini!]] anyways. Not when it&#39;s is literally right in front of you!]
 
 
 (if: $octiniMeter &gt;= 400 and $octiniMeter &lt;= 600)[(set: $octiniCaught to 1)
 &lt;img src=https://cdn.discordapp.com/attachments/945856090598412339/1225468344233365564/IMG_8694.png?ex=66213d55&amp;is=660ec855&amp;hm=21264cb68a5bb1fc098eba24893d7108a87618bfc1ded4b6b807ed99b803ab45&amp;&quot; style=&quot;display: block; margin-left: auto; margin-right: auto; width: 50%;&quot;&gt;]
-</tw-passagedata><tw-passagedata pid="15" name="its silly face" tags="" position="1025,1125" size="100,100">Your hands begin to tremble again. Perhaps the ghost seems flattered at your comment. Maybe it&#39;s angry.
+
+You have (css: &quot;color: red; font-size: 100%&quot;)[|amount&gt;[$minute]] minutes and  (css: &quot;color: red; font-size: 100%&quot;)[|amount2&gt;[$minute]] seconds left!
+
+(live: 1s)[
+	(set: $second to it - 1)
+    (if:$second &lt; 0)[(set: $second to 59) (set: $minute to it -1)]
+    (if: ($minute is 0) and ($second is 0)) [(go-to: &quot;END&quot;)]
+	(replace: ?amount)[$minute]
+    (replace: ?amount2)[$second]
+]</tw-passagedata><tw-passagedata pid="15" name="its silly face" tags="" position="1025,1125" size="100,100">Your hands begin to tremble again. Perhaps the ghost seems flattered at your comment. Maybe it&#39;s angry.
 
 (force-input: bind $convostring, &quot;...how about you tell me a joke? if you&#39;re funny, i might let you take a look :)&quot;)
 
@@ -128,51 +264,241 @@ Aaaand....[[click-&gt;octiniClick]]!
 
 [[&gt;&gt; What is a ghost&#39;s favorite fruit?]]
 [[&gt;&gt; You know why I love ghosts?]]
-]]</tw-passagedata><tw-passagedata pid="16" name="&gt;&gt; What is a ghost&#39;s favorite fruit?" tags="" position="925,1275" size="100,100">(force-input: bind $convostring, &quot;...BOO-berry? i&#39;ve heard this one before. it&#39;s not as funny as you think.&quot;)
+]]
+
+You have (css: &quot;color: red; font-size: 100%&quot;)[|amount&gt;[$minute]] minutes and  (css: &quot;color: red; font-size: 100%&quot;)[|amount2&gt;[$minute]] seconds left!
+
+(live: 1s)[
+	(set: $second to it - 1)
+    (if:$second &lt; 0)[(set: $second to 59) (set: $minute to it -1)]
+    (if: ($minute is 0) and ($second is 0)) [(go-to: &quot;END&quot;)]
+	(replace: ?amount)[$minute]
+    (replace: ?amount2)[$second]
+]</tw-passagedata><tw-passagedata pid="16" name="&gt;&gt; What is a ghost&#39;s favorite fruit?" tags="" position="925,1275" size="100,100">(force-input: bind $convostring, &quot;...BOO-berry? i&#39;ve heard this one before. it&#39;s not as funny as you think.&quot;)
 
 (live: 0.2s)[(if: $convostring is &quot;...BOO-berry? i&#39;ve heard this one before. it&#39;s not as funny as you think.&quot;)[Oh. Sorry. Well, that was awkward. You mentally plead with the ghost again. You&#39;ll tell a better joke next time. You [[promise.]]]]
 
-</tw-passagedata><tw-passagedata pid="17" name="promise." tags="" position="1150,1250" size="100,100">(force-input: bind $convostring, &quot;...now THAT&#39;s pretty funny. tell you what. i&#39;ll see you around the 1 minute mark. if you can catch meeeeeeeeeeeeeeeeee!&quot;)
 
-(live: 0.2s)[(if: $convostring is &quot;...now THAT&#39;s pretty funny. tell you what. i&#39;ll see you around the 2 minute mark. if you can catch meeeeeeeeeeeeeeeeee!&quot;)[Guess you&#39;ll have to revisit this guy when it&#39;s down to the wire. What a tough customer. You finally feel your arms relax, and you realize that you can move them again! Time to get out of the [[office-&gt;Office]]]]
+You have (css: &quot;color: red; font-size: 100%&quot;)[|amount&gt;[$minute]] minutes and  (css: &quot;color: red; font-size: 100%&quot;)[|amount2&gt;[$minute]] seconds left!
 
-(set: $ghostTime to 2)</tw-passagedata><tw-passagedata pid="18" name="timedConfront" tags="" position="1275,1125" size="100,100">(if:$ghostTime is $minute)[(force-input: bind $convostring, &quot;Oh! You&#39;re back!&quot;)
+(live: 1s)[
+	(set: $second to it - 1)
+    (if:$second &lt; 0)[(set: $second to 59) (set: $minute to it -1)]
+    (if: ($minute is 0) and ($second is 0)) [(go-to: &quot;END&quot;)]
+	(replace: ?amount)[$minute]
+    (replace: ?amount2)[$second]
+]</tw-passagedata><tw-passagedata pid="17" name="promise." tags="" position="1150,1250" size="100,100">(force-input: bind $convostring, &quot;...now THAT&#39;s pretty funny. tell you what. i&#39;ll see you around the 2 minute mark. if you can catch meeeeeeeeeeeeeeeeee!&quot;)
+
+(live: 0.2s)[(if: $convostring is &quot;...now THAT&#39;s pretty funny. tell you what. i&#39;ll see you around the 2 minute mark. if you can catch meeeeeeeeeeeeeeeeee!&quot;)[Guess you&#39;ll have to revisit this guy when it&#39;s down to the wire. What a tough customer. You finally feel your arms relax, and you realize that you can move them again! Time to get out of the [[office-&gt;Office]].]]
+
+(set: $ghostTime to 2)
+
+You have (css: &quot;color: red; font-size: 100%&quot;)[|amount&gt;[$minute]] minutes and  (css: &quot;color: red; font-size: 100%&quot;)[|amount2&gt;[$minute]] seconds left!
+
+(live: 1s)[
+	(set: $second to it - 1)
+    (if:$second &lt; 0)[(set: $second to 59) (set: $minute to it -1)]
+    (if: ($minute is 0) and ($second is 0)) [(go-to: &quot;END&quot;)]
+	(replace: ?amount)[$minute]
+    (replace: ?amount2)[$second]
+]</tw-passagedata><tw-passagedata pid="18" name="timedConfront" tags="" position="1350,1025" size="100,100">(if:$ghostTime is $minute)[(force-input: bind $convostring, &quot;Oh! You&#39;re back!&quot;)
 (live: 0.2s)[(if: $convostring is &quot;Oh! You&#39;re back!&quot;)[There it is, as promised! Maybe you&#39;ll get to take a [[photo?]]]]]
 
-(else:)[The room feels hot. Maybe the ghost was lying to you? Guess it&#39;s time to go [[somewhere else.-&gt;Office]]]</tw-passagedata><tw-passagedata pid="19" name="take a seat at the bar" tags="" position="650,850" size="100,100">The bar feels eerily colder than the rest of the kitchen. A faded recipe magazine is placed in front of you. Flip to a page?
+(else:)[The room feels hot. Maybe the ghost was lying to you? Guess it&#39;s time to go [[somewhere else.-&gt;Office]]]
+
+You have (css: &quot;color: red; font-size: 100%&quot;)[|amount&gt;[$minute]] minutes and  (css: &quot;color: red; font-size: 100%&quot;)[|amount2&gt;[$minute]] seconds left!
+
+(live: 1s)[
+	(set: $second to it - 1)
+    (if:$second &lt; 0)[(set: $second to 59) (set: $minute to it -1)]
+    (if: ($minute is 0) and ($second is 0)) [(go-to: &quot;END&quot;)]
+	(replace: ?amount)[$minute]
+    (replace: ?amount2)[$second]
+]</tw-passagedata><tw-passagedata pid="19" name="take a seat at the bar" tags="" position="675,850" size="100,100">The bar feels eerily colder than the rest of the kitchen. A faded recipe magazine is placed in front of you. Flip to a page?
 
 (set: $pgNum to 0)
 
 You find yourself curiously flipping to page (dropdown: bind $pgNum, &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;, &quot;7&quot;, &quot;8&quot;, &quot;9&quot;, &quot;10&quot;), and narrow your eyes to [[see what&#39;s there-&gt;pageHandler]].
 
+You briefly think about [[leaving to the kitchen-&gt;Kitchen]].
+
+You have (css: &quot;color: red; font-size: 100%&quot;)[|amount&gt;[$minute]] minutes and  (css: &quot;color: red; font-size: 100%&quot;)[|amount2&gt;[$minute]] seconds left!
+
+(live: 1s)[
+	(set: $second to it - 1)
+    (if:$second &lt; 0)[(set: $second to 59) (set: $minute to it -1)]
+    (if: ($minute is 0) and ($second is 0)) [(go-to: &quot;END&quot;)]
+	(replace: ?amount)[$minute]
+    (replace: ?amount2)[$second]
+]
 </tw-passagedata><tw-passagedata pid="20" name="take a sip." tags="" position="450,700" size="100,100">It&#39;s icy, but nice. You wonder what&#39;s in this thing. Huh.
 
-Suddenly, you feel woozy, and your whole body freezes up. The whole room starts to spin, and you blink a few times to grab your bearings, before close your eyes and [[crumpling to the floor]]. </tw-passagedata><tw-passagedata pid="21" name="recipeObtain" tags="" position="1200,575" size="100,100">You pick up the crumpled piece of paper. It seems jagged on one side, as if it had ben ripped out of some larger pamphlet. On the corner, you see a faded number....8. Got it. You [[stick it in your pocket-&gt;Office]].
-(set: $recipeObtain to 1)</tw-passagedata><tw-passagedata pid="22" name="crumpling to the floor" tags="" position="275,725" size="100,100">[[...]]</tw-passagedata><tw-passagedata pid="23" name="..." tags="" position="275,600" size="100,100">You wake up in the [[living room-&gt;living room]]. You feel different somehow. Written on your arm is the &quot;&#39;PW: MEOWMEOW&quot;. PW? Feels like a password of some sort. </tw-passagedata><tw-passagedata pid="24" name="pageHandler" tags="" position="650,1000" size="100,100">(set: $drinkName to (a: &quot;martini&quot;, &quot;negroni&quot;, &quot;margarita&quot;, &quot;espresso martini&quot;, &quot;bloody mary&quot;))
-(set: $descriptor to (a: &quot;a flowery&quot;, &quot;an intense&quot;, &quot;a mild&quot;, &quot;a sweet&quot;, &quot;a sour&quot;))
+Suddenly, you feel woozy, and your whole body freezes up. The whole room starts to spin, and you blink a few times to grab your bearings, before closing your eyes and [[crumpling to the floor]]. 
 
+You have (css: &quot;color: red; font-size: 100%&quot;)[|amount&gt;[$minute]] minutes and  (css: &quot;color: red; font-size: 100%&quot;)[|amount2&gt;[$minute]] seconds left!
+
+(live: 1s)[
+	(set: $second to it - 1)
+    (if:$second &lt; 0)[(set: $second to 59) (set: $minute to it -1)]
+    (if: ($minute is 0) and ($second is 0)) [(go-to: &quot;END&quot;)]
+	(replace: ?amount)[$minute]
+    (replace: ?amount2)[$second]
+]</tw-passagedata><tw-passagedata pid="21" name="recipeObtain" tags="" position="1200,575" size="100,100">You pick up the crumpled piece of paper. It seems jagged on one side, as if it had ben ripped out of some larger pamphlet. On the corner, you see a faded number....8. Got it. You [[stick it in your pocket-&gt;Office]]. 
+(set: $recipeObtain to 1)
+
+You have (css: &quot;color: red; font-size: 100%&quot;)[|amount&gt;[$minute]] minutes and  (css: &quot;color: red; font-size: 100%&quot;)[|amount2&gt;[$minute]] seconds left!
+
+(live: 1s)[
+	(set: $second to it - 1)
+    (if:$second &lt; 0)[(set: $second to 59) (set: $minute to it -1)]
+    (if: ($minute is 0) and ($second is 0)) [(go-to: &quot;END&quot;)]
+	(replace: ?amount)[$minute]
+    (replace: ?amount2)[$second]
+]</tw-passagedata><tw-passagedata pid="22" name="crumpling to the floor" tags="" position="275,725" size="100,100">[[...]]
+
+You have (css: &quot;color: red; font-size: 100%&quot;)[|amount&gt;[$minute]] minutes and  (css: &quot;color: red; font-size: 100%&quot;)[|amount2&gt;[$minute]] seconds left!
+
+(live: 1s)[
+	(set: $second to it - 1)
+    (if:$second &lt; 0)[(set: $second to 59) (set: $minute to it -1)]
+    (if: ($minute is 0) and ($second is 0)) [(go-to: &quot;END&quot;)]
+	(replace: ?amount)[$minute]
+    (replace: ?amount2)[$second]
+]</tw-passagedata><tw-passagedata pid="23" name="..." tags="" position="275,600" size="100,100">You wake up in the [[living room-&gt;living room]]. You feel different somehow. Written on your arm is the &quot;&#39;PW: MEOWMEOW&quot;. PW? Feels like a password of some sort. 
+
+You have (css: &quot;color: red; font-size: 100%&quot;)[|amount&gt;[$minute]] minutes and  (css: &quot;color: red; font-size: 100%&quot;)[|amount2&gt;[$minute]] seconds left!
+
+(live: 1s)[
+	(set: $second to it - 1)
+    (if:$second &lt; 0)[(set: $second to 59) (set: $minute to it -1)]
+    (if: ($minute is 0) and ($second is 0)) [(go-to: &quot;END&quot;)]
+	(replace: ?amount)[$minute]
+    (replace: ?amount2)[$second]
+]</tw-passagedata><tw-passagedata pid="24" name="pageHandler" tags="" position="650,1000" size="100,100">(set: $drinkName to (a: &quot;martini&quot;, &quot;negroni&quot;, &quot;margarita&quot;, &quot;espresso martini&quot;, &quot;bloody mary&quot;))
+(set: $descriptor to (a: &quot;a flowery&quot;, &quot;an intense&quot;, &quot;a mild&quot;, &quot;a sweet&quot;, &quot;a sour&quot;))
 (set: $drink to $drinkName&#39;s ((random: 1, 5)))
 (set: $descript to $descriptor&#39;s ((random: 1, 5)))
-
-(if: $pageNum is not 8)[This page tells you how to make $descript $drink. [[You try flipping to another page.-&gt;take a seat at the bar]].] (else:)[ Huh.... the page seems to be ripped out.
+(if: $pgNum is &quot;8&quot;)[ Huh.... the page seems to be ripped out. 
 (if:$recipeObtain is 1)[Luckily, you might actually have a remedy for this! You grab the crumpled and missing page out of your pocket, and place it in the book. Immediately, both the book and the page are snatched out of your hand. You look up, and see nothing...which is exactly what you&#39;d see if a ghost was there! Seems like you&#39;re face to face with a [[ghost-&gt;catch octini!]].](else:)[You wonder what&#39;s in it. You also wonder what&#39;s [[in the other pages.-&gt;take a seat at the bar]]]
-]</tw-passagedata><tw-passagedata pid="25" name="sunroom" tags="" position="275,875" size="100,100">You enter the sunroom, and see a [[wall-&gt;sunroom1]] with [[grooves-&gt;sunroom1]] in it, an old grandfather [[clock-&gt;sunroom1]], a [[blackboard-&gt;sunroom1]], a [[whiteboard-&gt;sunroom1]], a ring of [[keys-&gt;sunroom1]], a [[figurine-&gt;sunroom1]], a [[clay pot-&gt;sunroom1]], [[stockings-&gt;sunroom1]], a [[drill press-&gt;sunroom1]], a [[cork-&gt;sunroom1]], a [[lace curtain-&gt;sunroom1]], a [[magnet-&gt;sunroom1]], a [[wallet-&gt;sunroom1]], a [[spool of thread-&gt;sunroom1]], and [[sandals-&gt;sunroom1]].</tw-passagedata><tw-passagedata pid="26" name="login screen" tags="" position="1300,850" size="100,100">(set: $password to (prompt: &quot;Enter Password:&quot;, &quot;&quot;))(if:($password is &quot;MEOWMEOW&quot;))[(go-to: &quot;Convo&quot;)]</tw-passagedata><tw-passagedata pid="27" name="catClick" tags="" position="750,1275" size="100,100">(if: $catMeter1 &gt;= 300 and $catMeter1 &lt;= 700 and $catMeter2 &gt;= 300 and $catMeter2 &lt;= 700 and $catMeter3 &gt;= 300 and $catMeter3 &lt;= 700)[(set:$catCaught to 1)You caught them on camera. It looks like....3 ghosts of cats? Huh. Onto the [[next.-&gt;living room]]](else:)[Ugh, they were too fast for you. Seems like you&#39;ll have to [[catch them again.-&gt;catch cats!]]]
+]
 
-(if: $catMeter1 &gt;= 300 and $catMeter1 &lt;= 700 and $catMeter2 &gt;= 300 and $catMeter2 &lt;= 700 and $catMeter3 &gt;= 300 and $catMeter3 &lt;= 700)[&lt;img src=https://cdn.discordapp.com/attachments/945856090598412339/1225468345223217162/IMG_8695.png?ex=66213d55&amp;is=660ec855&amp;hm=a2558e66a25f9e72dbd3b7253d02c9793e76e7e2144fa2d5f0f08c20a6b1bbae&amp;&quot; style=&quot;display: block; margin-left: auto; margin-right: auto; width: 50%;&quot;&gt;]</tw-passagedata><tw-passagedata pid="28" name="Untitled Passage" tags="" position="1025,1550" size="100,100">
+(if: $pgNum is not &quot;8&quot;)[This page tells you how to make $descript $drink. [[You try flipping to another page-&gt;take a seat at the bar]].] 
+
+
+You have (css: &quot;color: red; font-size: 100%&quot;)[|amount&gt;[$minute]] minutes and  (css: &quot;color: red; font-size: 100%&quot;)[|amount2&gt;[$minute]] seconds left!
+
+(live: 1s)[
+	(set: $second to it - 1)
+    (if:$second &lt; 0)[(set: $second to 59) (set: $minute to it -1)]
+    (if: ($minute is 0) and ($second is 0)) [(go-to: &quot;END&quot;)]
+	(replace: ?amount)[$minute]
+    (replace: ?amount2)[$second]
+]</tw-passagedata><tw-passagedata pid="25" name="sunroom" tags="" position="275,875" size="100,100">You enter the sunroom, and see a [[wall-&gt;sunroom1]] with [[grooves-&gt;sunroom1]] in it, an old grandfather [[clock-&gt;sunroom1]], a [[blackboard-&gt;sunroom1]], a [[whiteboard-&gt;sunroom1]], a ring of [[keys-&gt;sunroom1]], a [[figurine-&gt;sunroom1]], a [[clay pot-&gt;sunroom1]], [[stockings-&gt;sunroom1]], a [[drill press-&gt;sunroom1]], a [[cork-&gt;sunroom1]], a [[lace curtain-&gt;sunroom1]], a [[magnet-&gt;sunroom1]], a [[wallet-&gt;sunroom1]], a [[spool of thread-&gt;sunroom1]], and [[sandals-&gt;sunroom1]].
+
+You have (css: &quot;color: red; font-size: 100%&quot;)[|amount&gt;[$minute]] minutes and  (css: &quot;color: red; font-size: 100%&quot;)[|amount2&gt;[$minute]] seconds left!
+
+(live: 1s)[
+	(set: $second to it - 1)
+    (if:$second &lt; 0)[(set: $second to 59) (set: $minute to it -1)]
+    (if: ($minute is 0) and ($second is 0)) [(go-to: &quot;END&quot;)]
+	(replace: ?amount)[$minute]
+    (replace: ?amount2)[$second]
+]</tw-passagedata><tw-passagedata pid="26" name="login screen" tags="" position="1300,850" size="100,100">(set: $password to (prompt: &quot;Enter Password:&quot;, &quot;&quot;))(if:($password is &quot;MEOWMEOW&quot;))[(go-to: &quot;Convo&quot;)](else:)[Argh, you don&#39;t know the password. You get out of the [[office-&gt;Office]] chair.]
+
+You have (css: &quot;color: red; font-size: 100%&quot;)[|amount&gt;[$minute]] minutes and  (css: &quot;color: red; font-size: 100%&quot;)[|amount2&gt;[$minute]] seconds left!
+
+(live: 1s)[
+	(set: $second to it - 1)
+    (if:$second &lt; 0)[(set: $second to 59) (set: $minute to it -1)]
+    (if: ($minute is 0) and ($second is 0)) [(go-to: &quot;END&quot;)]
+	(replace: ?amount)[$minute]
+    (replace: ?amount2)[$second]
+]</tw-passagedata><tw-passagedata pid="27" name="catClick" tags="" position="750,1275" size="100,100">(if: $catMeter1 &gt;= 300 and $catMeter1 &lt;= 700 and $catMeter2 &gt;= 300 and $catMeter2 &lt;= 700 and $catMeter3 &gt;= 300 and $catMeter3 &lt;= 700)[(set:$catCaught to 1)You caught them on camera. It looks like....3 ghosts of cats? Huh. Onto the [[next.-&gt;living room]]](else:)[Ugh, they were too fast for you. Seems like you&#39;ll have to [[catch them again.-&gt;catch cats!]]]
+
+(if: $catMeter1 &gt;= 300 and $catMeter1 &lt;= 700 and $catMeter2 &gt;= 300 and $catMeter2 &lt;= 700 and $catMeter3 &gt;= 300 and $catMeter3 &lt;= 700)[&lt;img src=https://cdn.discordapp.com/attachments/945856090598412339/1225468345223217162/IMG_8695.png?ex=66213d55&amp;is=660ec855&amp;hm=a2558e66a25f9e72dbd3b7253d02c9793e76e7e2144fa2d5f0f08c20a6b1bbae&amp;&quot; style=&quot;display: block; margin-left: auto; margin-right: auto; width: 50%;&quot;&gt;]
+
+You have (css: &quot;color: red; font-size: 100%&quot;)[|amount&gt;[$minute]] minutes and  (css: &quot;color: red; font-size: 100%&quot;)[|amount2&gt;[$minute]] seconds left!
+
+(live: 1s)[
+	(set: $second to it - 1)
+    (if:$second &lt; 0)[(set: $second to 59) (set: $minute to it -1)]
+    (if: ($minute is 0) and ($second is 0)) [(go-to: &quot;END&quot;)]
+	(replace: ?amount)[$minute]
+    (replace: ?amount2)[$second]
+]</tw-passagedata><tw-passagedata pid="28" name="Untitled Passage" tags="" position="1025,1550" size="100,100">
 
 {(unpack: (palette: &quot;mono&quot;, orange + black) into (a:_bg, _c, _lc, _hc))
 (enchant: ?page, (background: _bg) + (text-colour:_c))
 (enchant: ?link, (text-colour:_lc) + (hover-style: (text-colour:_hc)))}
 This passage uses (link:&quot;(more)&quot;)[a brown palette.]</tw-passagedata><tw-passagedata pid="29" name="&gt;&gt; You know why I love ghosts?" tags="" position="1000,1425" size="100,100">(force-input: bind $convostring, &quot;what?&quot;)
 
-(live: 0.2s)[(if: $convostring is &quot;what?&quot;)[That they&#39;re really transparent with you. Heh. [[Hehe.-&gt;promise.]]]]
+(live: 0.2s)[(if: $convostring is &quot;what?&quot;)[They&#39;re really transparent with you. Heh. [[Hehe.-&gt;promise.]]]]
 
-</tw-passagedata><tw-passagedata pid="30" name="Untitled Passage 1" tags="" position="1175,1525" size="100,100">Huh....
-&lt;img src=https://cdn.discordapp.com/attachments/945856090598412339/1225468343872651264/IMG_8693.png?ex=66213d55&amp;is=660ec855&amp;hm=41b3c8e12d36d3c82642729053874b6487e92dc907810b98726239b1a82e5f52&amp;&quot; style=&quot;display: block; margin-left: auto; margin-right: auto; width: 50%;&quot;&gt; </tw-passagedata><tw-passagedata pid="31" name="sunroom1" tags="" position="275,1000" size="100,100">You enter the sunroom, and see a [[wall-&gt;sunroom1]] with [[grooves-&gt;sunroom1]] in it, an old grandfather [[clock-&gt;sunroom1]], a [[blackboard-&gt;sunroom1]], a [[whiteboard-&gt;sunroom1]], a ring of [[keys-&gt;sunroom1]], a [[figurine-&gt;sunroom1]], a [[clay pot-&gt;sunroom1]], [[stockings-&gt;sunroom1]], a [[drill press-&gt;sunroom1]], a [[cork-&gt;sunroom1]], a [[lace curtain-&gt;sunroom1]], an [[anchor-&gt;sunroom2]], a [[wallet-&gt;sunroom1]], a [[spool of thread-&gt;sunroom1]], and [[sandals-&gt;sunroom1]].</tw-passagedata><tw-passagedata pid="32" name="sunroom2" tags="" position="275,1125" size="100,100">You enter the sunroom, and see a [[wall-&gt;sunroom2]] with [[grooves-&gt;sunroom2]] in it, an old grandfather [[clock-&gt;sunroom2]], a [[corkboard-&gt;sunroom3]], a [[whiteboard-&gt;sunroom2]], a ring of [[keys-&gt;sunroom2]], a [[figurine-&gt;sunroom2]], a [[clay pot-&gt;sunroom2]], [[stockings-&gt;sunroom2]], a [[drill press-&gt;sunroom2]], a [[cork-&gt;sunroom2]], a [[lace curtain-&gt;sunroom2]], an [[anchor-&gt;sunroom2]], a [[wallet-&gt;sunroom2]], a [[spool of thread-&gt;sunroom2]], and [[sandals-&gt;sunroom2]].</tw-passagedata><tw-passagedata pid="33" name="sunroom3" tags="" position="250,1250" size="100,100">You enter the sunroom, and see a [[coin-&gt;dink!]] with [[coins-&gt;dink!]] in it, an old grandfather [[coin-&gt;dink!]], a [[coin-&gt;dink!]], a [[coin-&gt;dink!]], a ring of [[coins-&gt;dink!]], a [[coin-&gt;sunroom2]], a [[clay coin-&gt;dink!]], [[coins-&gt;dink!]], a [[coin-&gt;dink!]], a [[coin-&gt;dink!]], a [[coin-&gt;dink!]], a [[coin-&gt;dink!]], a [[coin-&gt;dink!]], a [[coin of coins-&gt;dink!]], and [[coins-&gt;dink!]].</tw-passagedata><tw-passagedata pid="34" name="dink!" tags="" position="275,1375" size="100,100">Clink! A coin with a cat face on it falls into your [[pocket-&gt;Kitchen]].
-($set: $coinCount to it + 1)
-($set: $sunRoom to True)</tw-passagedata><tw-passagedata pid="35" name="coin" tags="" position="1475,1100" size="100,100">(if:$bedRoom is True)[What [[coin?-&gt;bedroom]]](else:)[Clink! A coin with a cat face on it falls into your [[pocket-&gt;bedroom]]. ($set: $coinCount to it + 1)
-($set: $bedRoom to True)]
-</tw-passagedata><tw-passagedata pid="36" name="photo?" tags="" position="1275,1250" size="100,100">The room chills, and, with shaking hands, you pull out your trusty camera.
+You have (css: &quot;color: red; font-size: 100%&quot;)[|amount&gt;[$minute]] minutes and  (css: &quot;color: red; font-size: 100%&quot;)[|amount2&gt;[$minute]] seconds left!
+
+(live: 1s)[
+	(set: $second to it - 1)
+    (if:$second &lt; 0)[(set: $second to 59) (set: $minute to it -1)]
+    (if: ($minute is 0) and ($second is 0)) [(go-to: &quot;END&quot;)]
+	(replace: ?amount)[$minute]
+    (replace: ?amount2)[$second]
+]</tw-passagedata><tw-passagedata pid="30" name="Untitled Passage 1" tags="" position="1175,1525" size="100,100">Huh....
+&lt;img src=https://cdn.discordapp.com/attachments/945856090598412339/1225468343872651264/IMG_8693.png?ex=66213d55&amp;is=660ec855&amp;hm=41b3c8e12d36d3c82642729053874b6487e92dc907810b98726239b1a82e5f52&amp;&quot; style=&quot;display: block; margin-left: auto; margin-right: auto; width: 50%;&quot;&gt; </tw-passagedata><tw-passagedata pid="31" name="sunroom1" tags="" position="275,1000" size="100,100">You enter the sunroom, and see a [[wall-&gt;sunroom1]] with [[grooves-&gt;sunroom1]] in it, an old grandfather [[clock-&gt;sunroom1]], a [[blackboard-&gt;sunroom1]], a [[whiteboard-&gt;sunroom1]], a ring of [[keys-&gt;sunroom1]], a [[figurine-&gt;sunroom1]], a [[clay pot-&gt;sunroom1]], [[stockings-&gt;sunroom1]], a [[drill press-&gt;sunroom1]], a [[cork-&gt;sunroom1]], a [[lace curtain-&gt;sunroom1]], an [[anchor-&gt;sunroom2]], a [[wallet-&gt;sunroom1]], a [[spool of thread-&gt;sunroom1]], and [[sandals-&gt;sunroom1]].
+
+You have (css: &quot;color: red; font-size: 100%&quot;)[|amount&gt;[$minute]] minutes and  (css: &quot;color: red; font-size: 100%&quot;)[|amount2&gt;[$minute]] seconds left!
+
+(live: 1s)[
+	(set: $second to it - 1)
+    (if:$second &lt; 0)[(set: $second to 59) (set: $minute to it -1)]
+    (if: ($minute is 0) and ($second is 0)) [(go-to: &quot;END&quot;)]
+	(replace: ?amount)[$minute]
+    (replace: ?amount2)[$second]
+]</tw-passagedata><tw-passagedata pid="32" name="sunroom2" tags="" position="275,1125" size="100,100">You enter the sunroom, and see a [[wall-&gt;sunroom2]] with [[grooves-&gt;sunroom2]] in it, an old grandfather [[clock-&gt;sunroom2]], a [[corkboard-&gt;sunroom3]], a [[whiteboard-&gt;sunroom2]], a ring of [[keys-&gt;sunroom2]], a [[figurine-&gt;sunroom2]], a [[clay pot-&gt;sunroom2]], [[stockings-&gt;sunroom2]], a [[drill press-&gt;sunroom2]], a [[cork-&gt;sunroom2]], a [[lace curtain-&gt;sunroom2]], an [[anchor-&gt;sunroom2]], a [[wallet-&gt;sunroom2]], a [[spool of thread-&gt;sunroom2]], and [[sandals-&gt;sunroom2]].
+
+You have (css: &quot;color: red; font-size: 100%&quot;)[|amount&gt;[$minute]] minutes and  (css: &quot;color: red; font-size: 100%&quot;)[|amount2&gt;[$minute]] seconds left!
+
+(live: 1s)[
+	(set: $second to it - 1)
+    (if:$second &lt; 0)[(set: $second to 59) (set: $minute to it -1)]
+    (if: ($minute is 0) and ($second is 0)) [(go-to: &quot;END&quot;)]
+	(replace: ?amount)[$minute]
+    (replace: ?amount2)[$second]
+]</tw-passagedata><tw-passagedata pid="33" name="sunroom3" tags="" position="250,1250" size="100,100">You enter the sunroom, and see a [[coin-&gt;dink!]] with [[coins-&gt;dink!]] in it, an old grandfather [[coin-&gt;dink!]], a [[coin-&gt;dink!]], a [[coin-&gt;dink!]], a ring of [[coins-&gt;dink!]], a [[coin-&gt;sunroom2]], a [[clay coin-&gt;dink!]], [[coins-&gt;dink!]], a [[coin-&gt;dink!]], a [[coin-&gt;dink!]], a [[coin-&gt;dink!]], a [[coin-&gt;dink!]], a [[coin-&gt;dink!]], a [[coin of coins-&gt;dink!]], and [[coins-&gt;dink!]].
+
+You have (css: &quot;color: red; font-size: 100%&quot;)[|amount&gt;[$minute]] minutes and  (css: &quot;color: red; font-size: 100%&quot;)[|amount2&gt;[$minute]] seconds left!
+
+(live: 1s)[
+	(set: $second to it - 1)
+    (if:$second &lt; 0)[(set: $second to 59) (set: $minute to it -1)]
+    (if: ($minute is 0) and ($second is 0)) [(go-to: &quot;END&quot;)]
+	(replace: ?amount)[$minute]
+    (replace: ?amount2)[$second]
+]</tw-passagedata><tw-passagedata pid="34" name="dink!" tags="" position="275,1375" size="100,100">Clink! A coin with a cat face on it falls into your [[pocket-&gt;Kitchen]]. 
+
+(set: $yourCoins to it + 1)
+(set: $sunRoom to True)
+
+You have (css: &quot;color: red; font-size: 100%&quot;)[|amount&gt;[$minute]] minutes and  (css: &quot;color: red; font-size: 100%&quot;)[|amount2&gt;[$minute]] seconds left!
+
+(live: 1s)[
+	(set: $second to it - 1)
+    (if:$second &lt; 0)[(set: $second to 59) (set: $minute to it -1)]
+    (if: ($minute is 0) and ($second is 0)) [(go-to: &quot;END&quot;)]
+	(replace: ?amount)[$minute]
+    (replace: ?amount2)[$second]
+]</tw-passagedata><tw-passagedata pid="35" name="coin" tags="" position="1475,1100" size="100,100">(if:$bedRoom is True)[What [[coin?-&gt;bedroom]]](else:)[Clink! A coin with a cat face on it falls into your [[pocket-&gt;bedroom]]. 
+(set: $yourCoins to it + 1)
+(set: $bedRoom to True)]
+
+You have (css: &quot;color: red; font-size: 100%&quot;)[|amount&gt;[$minute]] minutes and  (css: &quot;color: red; font-size: 100%&quot;)[|amount2&gt;[$minute]] seconds left!
+
+(live: 1s)[
+	(set: $second to it - 1)
+    (if:$second &lt; 0)[(set: $second to 59) (set: $minute to it -1)]
+    (if: ($minute is 0) and ($second is 0)) [(go-to: &quot;END&quot;)]
+	(replace: ?amount)[$minute]
+    (replace: ?amount2)[$second]
+]</tw-passagedata><tw-passagedata pid="36" name="photo?" tags="" position="1275,1250" size="100,100">The room chills, and, with shaking hands, you pull out your trusty camera.
 
 (meter: bind $compMeter, 1000, &quot;X&quot;, , (gradient:90,  0, red, 0.39, orange, 0.4,green,  0.6,green, 0.61, orange, 1, red))
 
@@ -186,10 +512,30 @@ Aaaand....[[click-&gt;compClick]]!
     (if:$compMeter  &lt;= 0)[(set: _direction to 90)]
     (set: $compMeter to it +_direction)
 ]
-</tw-passagedata><tw-passagedata pid="37" name="compClick" tags="" position="1275,1375" size="100,100">(if: $compMeter &gt;= 400 and $compMeter &lt;= 600)[Ah! You caught it! You excitedly grip your photo and head out of the [[office-&gt;Office]] ] (else:) [Gah...so slippery. Time to [[try again-&gt;photo?]]]
+
+You have (css: &quot;color: red; font-size: 100%&quot;)[|amount&gt;[$minute]] minutes and  (css: &quot;color: red; font-size: 100%&quot;)[|amount2&gt;[$minute]] seconds left!
+
+(live: 1s)[
+	(set: $second to it - 1)
+    (if:$second &lt; 0)[(set: $second to 59) (set: $minute to it -1)]
+    (if: ($minute is 0) and ($second is 0)) [(go-to: &quot;END&quot;)]
+	(replace: ?amount)[$minute]
+    (replace: ?amount2)[$second]
+]</tw-passagedata><tw-passagedata pid="37" name="compClick" tags="" position="1275,1375" size="100,100">(if: $compMeter &gt;= 400 and $compMeter &lt;= 600)[Ah! You caught it! You excitedly grip your photo and head out of the [[office-&gt;Office]] ] (else:) [Gah...so slippery. Time to [[try again-&gt;photo?]].]
 (if: $comMeter &gt;= 400 and $compMeter &lt;= 600)[(set: $compCaught to 1)]
 (if: $compMeter &gt;= 400 and $compMeter &lt;= 600)[
-&lt;img src=https://cdn.discordapp.com/attachments/945856090598412339/1225468343872651264/IMG_8693.png?ex=66213d55&amp;is=660ec855&amp;hm=41b3c8e12d36d3c82642729053874b6487e92dc907810b98726239b1a82e5f52&amp;&quot; style=&quot;display: block; margin-left: auto; margin-right: auto; width: 50%;&quot;&gt;]</tw-passagedata><tw-passagedata pid="38" name="actualStart" tags="" position="850,200" size="100,100">[[Daunting Dwelling-&gt;Start]]</tw-passagedata></tw-storydata>
+&lt;img src=https://cdn.discordapp.com/attachments/945856090598412339/1225468343872651264/IMG_8693.png?ex=66213d55&amp;is=660ec855&amp;hm=41b3c8e12d36d3c82642729053874b6487e92dc907810b98726239b1a82e5f52&amp;&quot; style=&quot;display: block; margin-left: auto; margin-right: auto; width: 50%;&quot;&gt;]
+
+You have (css: &quot;color: red; font-size: 100%&quot;)[|amount&gt;[$minute]] minutes and  (css: &quot;color: red; font-size: 100%&quot;)[|amount2&gt;[$minute]] seconds left!
+
+(live: 1s)[
+	(set: $second to it - 1)
+    (if:$second &lt; 0)[(set: $second to 59) (set: $minute to it -1)]
+    (if: ($minute is 0) and ($second is 0)) [(go-to: &quot;END&quot;)]
+	(replace: ?amount)[$minute]
+    (replace: ?amount2)[$second]
+]</tw-passagedata><tw-passagedata pid="38" name="actualStart" tags="" position="850,200" size="100,100">[[Daunting Dwelling-&gt;Start]]
+</tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
 var require,define;!function(){var e={},r={};require=function(i){var n=e[i];return n&&(r[i]=n[1].apply(void 0,n[0].map(require)),e[i]=void 0),r[i]},(define=function(r,i,n){if("function"==typeof r)return r();e[r]=[i,n]}).amd=!0}();/*!
  * https://github.com/paulmillr/es6-shim
