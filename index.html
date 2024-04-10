@@ -50,6 +50,7 @@ Armed with only your trusty polaroid camera, you brace yourself and approach the
 (set: $ghostTime to 100)
 (set:$yourCoins to 0)
 (set: $sunRoom to False)
+(set: $bedRoom to False)
 
 You have (css: &quot;color: red; font-size: 100%&quot;)[|amount&gt;[$minute]] minutes and  (css: &quot;color: red; font-size: 100%&quot;)[|amount2&gt;[$minute]] seconds left!
 (live: 1s)[
@@ -142,12 +143,12 @@ It seems like you could slide something in its mouth....or head back to the [[li
  (if: $catCoins &gt; 0) [You&#39;ve already put a coin in, and you&#39;ve seen nothing happen so far.]
  (if: $yourCoins &gt; 0)[Care to [[put a coin in?]] If you do, then you cannot have it back. Although you could always [[decline-&gt;living room]]. ]
  
-</tw-passagedata><tw-passagedata pid="9" name="put a coin in?" tags="" position="850,975" size="100,100">You deposit the coin inside the cat&#39;s mouth. It could just be your imagination, but you could almost feel the sandpaper texture of the cat&#39;s tongue scratch against your finger. 
+(if: $catsCoins is 2)[The muted rumbling of the statue has faded. You get the feeling that the [[cat is full-&gt;catch cats!]].]</tw-passagedata><tw-passagedata pid="9" name="put a coin in?" tags="" position="850,975" size="100,100">You deposit the coin inside the cat&#39;s mouth. It could just be your imagination, but you could almost feel the sandpaper texture of the cat&#39;s tongue scratch against your finger. 
 
 The cat&#39;s eyes seem to gleam, and you hear the harsh sound of the coin inside its cold stone body. The statue seems to have been fed a nice [[treat-&gt;living room]].
 (set: $yourCoins to it -1)
 (set: $catsCoins to it +1)
-(if: $catsCoins is 2)[The muted rumbling of the statue has faded. You get the feeling that the [[cat is full-&gt;catch cats!]].]
+
 
 You have (css: &quot;color: red; font-size: 100%&quot;)[|amount&gt;[$minute]] minutes and  (css: &quot;color: red; font-size: 100%&quot;)[|amount2&gt;[$minute]] seconds left!
 
@@ -486,7 +487,8 @@ You have (css: &quot;color: red; font-size: 100%&quot;)[|amount&gt;[$minute]] mi
     (if: ($minute is 0) and ($second is 0)) [(go-to: &quot;END&quot;)]
 	(replace: ?amount)[$minute]
     (replace: ?amount2)[$second]
-]</tw-passagedata><tw-passagedata pid="35" name="coin" tags="" position="1475,1100" size="100,100">(if:$bedRoom is True)[What [[coin?-&gt;bedroom]]](else:)[Clink! A coin with a cat face on it falls into your [[pocket-&gt;bedroom]]. 
+]</tw-passagedata><tw-passagedata pid="35" name="coin" tags="" position="1475,1100" size="100,100">(if:$bedRoom is True)[What [[coin?-&gt;bedroom]]]
+(else:)[Clink! A coin with a cat face on it falls into your [[pocket-&gt;bedroom]]. 
 (set: $yourCoins to it + 1)
 (set: $bedRoom to True)]
 
